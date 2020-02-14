@@ -33,4 +33,4 @@ let senior = age >= 65
 
 console.log('AGE: ' + age)
 console.log(child ? "Is Child" : 'Not a Child')
-console.log(senior ? 'You are OLD! Ha ha ha ha!' : "Good job you haven't aged!")
+console.log(senior ? 'You are OLD! Ha ha ha ha!' : "Good job you haven't agedS")
