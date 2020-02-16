@@ -27,10 +27,50 @@ console.log("Farenheit:" + farenheit)
 console.log("Celsius:" + celsiusCalc)
 console.log("Kelvin:" + kelvinCalc)
 //  */
-let age = 97
-let child = age <= 7
-let senior = age >= 65
+// let senior = age >= 65
 
-console.log('AGE: ' + age)
-console.log(child ? "Is Child" : 'Not a Child')
-console.log(senior ? 'You are OLD! Ha ha ha ha!' : "Good job you haven't agedS")
+// console.log('AGE: ' + age)
+// console.log(child ? "Is Child" : 'Not a Child')
+// console.log(senior ? 'You are OLD! Ha ha ha ha!' : "Good job you haven't aged!")
+
+// if (true) {
+//     let name = 'Jac'
+// }
+
+/* let name = 'John'
+console.log(`My name is ${name}.`)
+ */
+// let gradeCalc = function (score) {
+//     let grade = 'F'
+
+//     if (score === undefined)
+//         grade = 'undefined'
+//     else if (score < 60)
+//         grade = 'F'
+//     else if (score < 70)
+//         grade = 'D'
+//     else if (score < 80)
+//         grade = 'C'
+//     else if (score < 90)
+//         grade = 'B'
+//     else
+//         grade = 'A'
+
+//     return `Score: ${score} --> Grade: ${grade}`
+    
+// }
+
+// console.log(gradeCalc(89))
+let book1 = {
+    title: 'Azar',
+    author: 'Tim Dainly',
+    pages: 100
+}
+let getObject = function (objName) {
+    return {
+        summary: `Book: ${objName.title} by ${objName.author}`,
+		pageCount: `Pages: ${objName.pages} `
+	}
+}
+
+console.log(getObject(book1).pageCount)
