@@ -66,6 +66,8 @@ let book1 = {
     author: 'Tim Dainly',
     pages: 100
 }
+
+/* // Function that returns an object: (1) Book Summary, (2) Page Count
 let getObject = function (objName) {
     return {
         summary: `Book: ${objName.title} by ${objName.author}`,
@@ -74,3 +76,94 @@ let getObject = function (objName) {
 }
 
 console.log(getObject(book1).pageCount)
+
+let x = getObject(book1)
+book1.title = 'Tile Change Pending'
+console.log(x.summary)
+
+x = getObject(book1)
+console.log(x.summary) */
+
+
+/* // Lesson 30: Object References - passing Objects to functions - always a REFERENCE, not value
+let myAccount = {
+    name: 'Andy Mead',
+    expenses: 0,
+    income: 0
+}
+
+let addExpense = function (account, amount) {
+    // addAccount = account
+    // console.log('In addExpense() account: ')
+    account.expenses = account.expenses + amount
+    // addAccount.expenses = addAccount.expenses + amount
+    // console.log(addAccount)
+
+}
+
+// Lesson 31: Add Functions
+let addIncome = function (account, amount=0) {
+    account.income = account.income + amount
+}
+let resetAccount = function (account) {
+    account.income = 0
+    account.expenses = 0
+}
+let accountSummary = function (account) {
+    return `**** Account Summary: ${account.name} ****\n` +
+    `Expenses: $${account.expenses}\n` +
+    `Income: $${account.income}\n` +
+    `******************************`
+}
+
+addExpense(myAccount, 40)
+addIncome(myAccount, 123000)
+console.log(accountSummary(myAccount))
+
+console.log('* Reset Account *')
+resetAccount(myAccount)
+console.log(accountSummary(myAccount))
+ */
+
+// Lesson 32: Methods
+let restaurant = {
+    name: 'ASB',
+    guestCapacity: 75,
+    guestCount: 0,
+    checkAvailability: function (partySize) {
+        // Code to compare guestCapacity to guestCount
+        let seatsLeft = this.guestCapacity - this.guestCount
+        return partySize <= seatsLeft
+    },
+    seatParty: function(partySize) {
+        this.guestCount += partySize
+        console.log(`Guests Seated: ${partySize}, Guest Count: ${this.guestCount}`)
+    },
+    removeParty: function(partySize) {
+        this.guestCount -= partySize
+        console.log(`Guests Removed: ${partySize}, Guest Count: ${this.guestCount}`)
+    }
+}
+
+party = 5
+restaurant.guestCount = 65
+
+if (restaurant.checkAvailability(party)) {
+    restaurant.seatParty(party)
+} else console.log('No Tables Available. Guests: ${restaurant.guestCount}')
+
+party = 6
+if (restaurant.checkAvailability(party)) {
+    restaurant.seatParty(party)
+} else {
+    console.log(`No Tables Available for ${party} guests. Guest Count: ${restaurant.guestCount}`) 
+}
+
+restaurant.removeParty(10)
+party = 6
+
+if (restaurant.checkAvailability(party)) {
+    restaurant.seatParty(party)
+} else {
+    console.log(`No Tables Available for ${party} guests. Guest Count: ${restaurant.guestCount}`)
+}
