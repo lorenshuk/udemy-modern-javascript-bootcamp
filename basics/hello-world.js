@@ -125,8 +125,8 @@ resetAccount(myAccount)
 console.log(accountSummary(myAccount))
  */
 
-// Lesson 32: Methods
-let restaurant = {
+        // Lesson 32: Methods
+/* let restaurant = {
     name: 'ASB',
     guestCapacity: 75,
     guestCount: 0,
@@ -167,3 +167,28 @@ if (restaurant.checkAvailability(party)) {
 } else {
     console.log(`No Tables Available for ${party} guests. Guest Count: ${restaurant.guestCount}`)
 }
+ */
+
+    // Lesson 33: Exploring String Methods
+/* let name = 'Muddy Wimplestein'
+console.log(name.includes('Wxmpl'))
+ */
+// Challenge: Password Validation
+let isValidPassword = function(password) {
+    /* Must be
+         1) > 8 Chars
+         2) Does not contain the string 'password'
+    */
+    
+    // Refactor to
+    /*         
+    if (password == '') return false
+    else if (password.length < 8) return false
+    else if (password.trim().toLowerCase().includes('password')) return false
+    return true
+    */
+    return (password.length >= 8) && !password.trim().toLowerCase().includes('password')
+}
+console.log(isValidPassword('1234567'))
+console.log(isValidPassword('thisisagood'))
+console.log(isValidPassword(' PassWord '))
