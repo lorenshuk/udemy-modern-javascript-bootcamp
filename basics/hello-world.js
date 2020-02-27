@@ -174,21 +174,43 @@ if (restaurant.checkAvailability(party)) {
 console.log(name.includes('Wxmpl'))
  */
 // Challenge: Password Validation
-let isValidPassword = function(password) {
-    /* Must be
-         1) > 8 Chars
-         2) Does not contain the string 'password'
-    */
+// let isValidPassword = function(password) {
+//     /* Must be
+//          1) > 8 Chars
+//          2) Does not contain the string 'password'
+//     */
     
-    // Refactor to
-    /*         
-    if (password == '') return false
-    else if (password.length < 8) return false
-    else if (password.trim().toLowerCase().includes('password')) return false
-    return true
-    */
-    return (password.length >= 8) && !password.trim().toLowerCase().includes('password')
+//   // Refactor to
+//   return (password.length >= 8) && !password.toLowerCase().includes('password')
+// }
+// console.log(isValidPassword('1234567'))
+// console.log(isValidPassword('thisisagood'))
+// console.log(isValidPassword(' PassWord ')) */
+/* console.log(10.333.toFixed(3))
+console.log(Math.round(1.33))
+console.log(Math.floor(1.33))
+console.log(Math.ceil(1.33))
+ */    
+
+         // Lesson 34: Math Methods
+// Random # between Min & Max digits
+
+/* 
+let min = 3
+let max = 25
+
+for (i=0; i<10; i++) {
+    let randomNum = Math.floor(Math.random() * (max - min + 1)) + min
+    console.log(randomNum)
 }
-console.log(isValidPassword('1234567'))
-console.log(isValidPassword('thisisagood'))
-console.log(isValidPassword(' PassWord '))
+ */
+// CHALLENGE: Simple Guessing Fx
+let makeGuess = function(guess) {
+    let min = 1
+    let max = 10
+    return guess === (Math.floor(Math.random() * (max - min + 1)) + min)
+}
+
+//for (i=0; i<5; i++) console.log(makeGuess(5))
+
+console.log('1234' === 1234)
