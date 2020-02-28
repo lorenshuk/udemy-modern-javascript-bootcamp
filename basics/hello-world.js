@@ -205,7 +205,7 @@ for (i=0; i<10; i++) {
 }
  */
 // CHALLENGE: Simple Guessing Fx
-let makeGuess = function(guess) {
+/* let makeGuess = function(guess) {
     let min = 1
     let max = 10
     let randNum = (Math.floor(Math.random() * (max - min + 1)) + min)
@@ -221,4 +221,29 @@ for (i=0; i<5; i++) {
 
     console.log(guessWhat.randNum + ': ' + guessWhat.match)
 }
-    
+ */
+
+        // Lesson 35: Constant Variables
+        // Lesson 36: "var" Variable Declaration keyword
+// Quirk 1 - Scope can fall out of blocks {} -> Function Type
+/* var firstName = 'Joe'
+
+if (1 === 1) {
+    var firstName = 'Jane'
+}
+
+//console.log(firstName)
+
+// Using "let" keeps the scope Blocked
+let lastName = 'Joe'
+
+if (1 === 1) {
+   let lastName = 'Jane'
+}
+
+console.log(lastName)
+*/
+
+// Quirk 3: No value assignment
+console.log(quirk3)
+let quirk3
