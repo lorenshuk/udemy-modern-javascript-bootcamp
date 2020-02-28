@@ -208,9 +208,17 @@ for (i=0; i<10; i++) {
 let makeGuess = function(guess) {
     let min = 1
     let max = 10
-    return guess === (Math.floor(Math.random() * (max - min + 1)) + min)
+    let randNum = (Math.floor(Math.random() * (max - min + 1)) + min)
+
+    return {
+        match: guess === randNum,
+        randNum: randNum
+    }
 }
 
-//for (i=0; i<5; i++) console.log(makeGuess(5))
+for (i=0; i<5; i++) {
+    guessWhat = makeGuess(5)
 
-console.log('1234' === 1234)
+    console.log(guessWhat.randNum + ': ' + guessWhat.match)
+}
+    
