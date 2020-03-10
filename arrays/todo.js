@@ -16,7 +16,7 @@ console.log(`Tasks: ${arr1}`)
  */
 
         // Lesson 40: looping through arrays
-let notes = ['Notes1', 'Notes2', 'Notes3', 'Notes4']
+/* let notes = ['Notes1', 'Notes2', 'Notes3', 'Notes4']
 
 notes.forEach(function (x, index) {
     // console.log(index+1 + '. ' + x)
@@ -27,6 +27,27 @@ for (x=0; x < notes.length; x++) {
     // console.log(notes[x])
 }
 // Count in reverse
+
 for (let count = notes.length - 1; count >= 0; count--) {
     console.log(`${count}. ${notes[count]}`)
 }
+*/
+ 
+/***** Lesson 42: Searching Arrays pt 1 ****/
+const notes = [{
+    title: 'My Next Trip',
+    body: 'Fishing in the Sierras. Packing my float tube to Alpine Lakes'
+}, {
+    title: 'Improve My Habits',
+    body: 'Waste less time watching TV, eat more veggie based meals, less processed stuff, excercise harder'
+}, {
+    title: 'Career Goals',
+    body:'Get a software developer job in Colorado or Northern California'
+}]
+
+const index = notes.findIndex( (note, index) => {
+    return note.title === 'My Next Trip'
+})
+
+console.log(index)
+console.log(notes[index].body)
