@@ -112,7 +112,7 @@ for (let count = notes.length - 1; count >= 0; count--) {
         // console.log(todos)
         
 /***** Lesson 44: FILTERING Arrays ****/
-const notes = [{
+/* const notes = [{
     title: 'My Next Trip',
     body: 'Fishing in the Sierras. Packing my float tube to Alpine Lakes'
 }, {
@@ -130,7 +130,7 @@ const findNotes = function (notes, query) {
         return isTitleMatch || isBodyMatch
     })
 }
-
+ */
 //console.log(notes)
 //console.log(findNotes(notes, 'tv'))
 
@@ -152,9 +152,67 @@ const todos = [{
     completed: true
 }]
 
+/* 
 const findIncompleted = function (todos) {
     return todos.filter(todo => {
         return !todo.completed
     })
 }
 console.log(findIncompleted(todos))
+ */
+
+/*** Lesson 45: Sorting Arrays ***/
+const notes = [{
+    title: '1My Next Trip',
+    body: 'Fishing in the Sierras. Packing my float tube to Alpine Lakes'
+}, {
+    title: '2Improve My Habits',
+    body: 'Waste less time watching TV, eat more veggie based meals, less processed stuff, excercise harder'
+}, {
+    title: '3Career Goals',
+    body:'Get a software developer job in Colorado or Northern California'
+}]
+
+const sortNotes = function (notes) {
+    notes.sort(function (a, b) {
+        if (a.title.toLowerCase() < b.title.toLowerCase()) {
+            return -1
+        } else if (b.title.toLowerCase() < a.title.toLowerCase()) {
+            return 1
+        } else {
+            return 0
+        }
+    })
+}
+
+// console.log(notes)
+// sortNotes(notes)
+// console.log('After Sort:')
+// console.log(notes)
+
+// CHALLENGE: Lesson 45: Sort todos array by the boolean field
+// 1. Sort by "completed" - Not completed at the TOP
+// 2. Fx Name: sortTodos(todos)
+const sortTodos = function(todos) {
+    todos.sort((a, b) => {
+        if (a.completed > b.completed) {
+            return 1
+        } else if (a.completed < b.completed) {
+            return -1
+        } else {
+            return 0
+        }
+
+    })
+}
+console.log('******')
+console.log('Before Sort')
+console.log(todos)
+console.log('******')
+
+sortTodos(todos)
+
+console.log('******')
+console.log('After Sort')
+console.log(todos)
+console.log('******')
