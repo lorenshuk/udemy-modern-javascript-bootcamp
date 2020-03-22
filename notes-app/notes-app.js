@@ -9,6 +9,13 @@ const notes = [{
    body: 'GET ONE!!!'
 }]
 
-document.querySelector('button').addEventListener('click', function() {
-   console.log('Button Clicked')
-})
+   document.querySelector('#create-note').addEventListener('click', function (e) {
+      e.target.textContent = 'Create Note Clicked'
+   })
+      
+   document.querySelector('#remove-all-notes').addEventListener('click', function (e) {
+      console.log('Remove All button clicked.')
+      document.querySelectorAll('.note').forEach(function(enote) {
+         enote.remove()
+      })
+   })

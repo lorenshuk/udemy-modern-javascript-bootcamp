@@ -39,7 +39,11 @@ todos.forEach((e) => {
     document.querySelector('body').appendChild(newParagraph)
 })
 
-document.querySelector('button').addEventListener('click', function (e) {
+// Lesson 53: Listen for "Add To Do" button click()
+document.querySelector('#add-todo').addEventListener('click', function (e) {
     e.target.textContent = e.target.textContent === 'Button Was Clicked' ? "Add To Do" : "Button Was Clicked"
+    document.querySelectorAll('p').forEach((etodo) => {
+        etodo.textContent += 'X'
+    })
 })
 
