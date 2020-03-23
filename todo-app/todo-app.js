@@ -43,7 +43,17 @@ todos.forEach((e) => {
 document.querySelector('#add-todo').addEventListener('click', function (e) {
     e.target.textContent = e.target.textContent === 'Button Was Clicked' ? "Add To Do" : "Button Was Clicked"
     document.querySelectorAll('p').forEach((etodo) => {
-        etodo.textContent += 'X'
     })
+})
+
+document.querySelector('#new-todo').addEventListener('input', function (e){
+    console.log(e.target.value)
+
+    if (e.target.value.length === 1) {
+        let newParagraph = document.createElement('p')
+        newParagraph.setAttribute('id', 'new-todo-paragraph')
+        document.querySelector('body').appendChild(newParagraph)
+    } 
+    document.querySelector('#new-todo-paragraph').textContent = e.target.value
 })
 

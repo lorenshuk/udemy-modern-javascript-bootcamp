@@ -19,3 +19,8 @@ const notes = [{
          enote.remove()
       })
    })
+
+   
+   document.querySelector('#search-text').addEventListener('change', function (e) {
+      console.log(e)
+   })
