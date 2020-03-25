@@ -24,20 +24,47 @@ const todos = [{
     completed: true
 }]
 
-// Count up the incomplete TO DO's
-const incompleteToDos = todos.filter(function (todo) {
-    return !todo.completed
-})
-const summary = document.createElement('h2')
-summary.textContent = `You have ${incompleteToDos.length} TO DO's left`
-document.querySelector('body').appendChild(summary)
+/*************************
+ * Lesson 57: Add Filter
+ *************************/
+// Add <input> for the filter
+let filters = {
+    searchText: ''
+}
 
-// Print all To Do's
-todos.forEach((e) => {
-    const newParagraph = document.createElement('p')
-    newParagraph.textContent = e.text
-    document.querySelector('body').appendChild(newParagraph)
-})
+const renderTodos = function (todos, filters) {
+    const filteredTodos = todos.filter(function(todo) {
+        return todo.text.toLowerCase().includes(filters.searchText.toLowerCase())
+    })
+
+    // Count up the incomplete TO DO's
+    const incompleteToDos = filteredTodos.filter(function (todo) {
+        return !todo.completed
+    })
+    
+    // Display Incomplete Header and Filtered To Do's
+    document.querySelector('#todos').innerHTML = ''
+
+    const summary = document.createElement('h2')
+    if (!incompleteToDos.length){
+        summary.textContent = `You have completed all TO DO's! Good Job!`
+    } else {
+        summary.textContent = `*You have ${incompleteToDos.length} TO DO's left`
+    }
+    document.querySelector('#todos').appendChild(summary)
+    
+    filteredTodos.forEach((e) => {
+        const newParagraph = document.createElement('p')
+        let newText = e.text
+        if (!e.completed) {
+            newText = `*${newText}`
+        }
+        newParagraph.textContent = newText
+        document.querySelector('#todos').appendChild(newParagraph)
+    })
+}
+
+renderTodos(todos, filters)
 
 // Lesson 53: Listen for "Add To Do" button click()
 document.querySelector('#add-todo').addEventListener('click', function (e) {
@@ -46,6 +73,7 @@ document.querySelector('#add-todo').addEventListener('click', function (e) {
     })
 })
 
+// Listen for the TODO-text change
 document.querySelector('#new-todo').addEventListener('input', function (e){
     console.log(e.target.value)
 
@@ -57,3 +85,8 @@ document.querySelector('#new-todo').addEventListener('input', function (e){
     document.querySelector('#new-todo-paragraph').textContent = e.target.value
 })
 
+// Lesson 57: Listener for the Filter Challenge
+document.querySelector('#filtertodos').addEventListener('input', function(e) {
+    filters.searchText = e.target.value
+    renderTodos(todos, filters)
+})
