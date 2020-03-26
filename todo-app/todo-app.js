@@ -47,7 +47,7 @@ const renderTodos = function (todos, filters) {
 
     const summary = document.createElement('h2')
     if (!incompleteToDos.length){
-        summary.textContent = `You have completed all TO DO's! Good Job!`
+        summary.textContent = `All Filtered TO DO's Completed! Good work!`
     } else {
         summary.textContent = `*You have ${incompleteToDos.length} TO DO's left`
     }
@@ -66,13 +66,7 @@ const renderTodos = function (todos, filters) {
 
 renderTodos(todos, filters)
 
-// Lesson 53: Listen for "Add To Do" button click()
-document.querySelector('#add-todo').addEventListener('click', function (e) {
-    e.target.textContent = e.target.textContent === 'Button Was Clicked' ? "Add To Do" : "Button Was Clicked"
-    document.querySelectorAll('p').forEach((etodo) => {
-    })
-})
-
+/* Lesson 58: Removed elements for the <form id="add-form"> element addition
 // Listen for the TODO-text change
 document.querySelector('#new-todo').addEventListener('input', function (e){
     console.log(e.target.value)
@@ -84,9 +78,20 @@ document.querySelector('#new-todo').addEventListener('input', function (e){
     } 
     document.querySelector('#new-todo-paragraph').textContent = e.target.value
 })
+ */
 
-// Lesson 57: Listener for the Filter Challenge
+ // Lesson 57: Listener for the Filter Challenge
 document.querySelector('#filtertodos').addEventListener('input', function(e) {
     filters.searchText = e.target.value
     renderTodos(todos, filters)
+})
+
+document.querySelector('#add-form').addEventListener('submit', function(e) {
+    e.preventDefault()
+    todos.push({
+        text: e.target.elements.addToDo.value,
+        completed: false
+    })
+    renderTodos(todos, filters)
+    e.target.elements.addToDo.value = ''
 })

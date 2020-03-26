@@ -33,12 +33,15 @@ document.querySelector('#create-note').addEventListener('click', function (e) {
    e.target.textContent = 'Create Note Clicked'
 })
    
+
+/* Lesson 58: Removed the button 3/25/20
 document.querySelector('#remove-all-notes').addEventListener('click', function (e) {
    console.log('Remove All button clicked.')
    document.querySelectorAll('.note').forEach(function(note) {
       note.remove()
    })
 })
+*/
 
 // Listen for the input filter handler
 document.querySelector('#search-text').addEventListener('input', function (e) {
@@ -46,3 +49,8 @@ document.querySelector('#search-text').addEventListener('input', function (e) {
    renderNotes(notes, filters)
 })
 
+// Lesson 58: Event Listener for the Submit Create Note <button> on the <form id="name-form"> element
+document.querySelector('#name-form').addEventListener('submit', function (e) {
+    e.preventDefault()
+    console.log(e.target.elements.firstName.value)
+})
