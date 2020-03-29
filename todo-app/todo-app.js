@@ -29,12 +29,16 @@ const todos = [{
  *************************/
 // Add <input> for the filter
 let filters = {
-    searchText: ''
+    searchText: '',
+    hideCompleted: false
 }
+
+// Lesson 59: Checkbox for Hide Completed TO DO's
+let hideCompleted = false
 
 const renderTodos = function (todos, filters) {
     const filteredTodos = todos.filter(function(todo) {
-        return todo.text.toLowerCase().includes(filters.searchText.toLowerCase())
+        return todo.text.toLowerCase().includes(filters.searchText.toLowerCase()) && (!filters.hideCompleted || !todo.completed)
     })
 
     // Count up the incomplete TO DO's
@@ -60,6 +64,7 @@ const renderTodos = function (todos, filters) {
             newText = `*${newText}`
         }
         newParagraph.textContent = newText
+        
         document.querySelector('#todos').appendChild(newParagraph)
     })
 }
@@ -94,4 +99,10 @@ document.querySelector('#add-form').addEventListener('submit', function(e) {
     })
     renderTodos(todos, filters)
     e.target.elements.addToDo.value = ''
+})
+
+// Lesson 59: Add checkbox & Event Listeners
+document.querySelector('#hide-completed').addEventListener('change', function (e) {
+    filters.hideCompleted = e.target.checked
+    renderTodos(todos, filters)
 })

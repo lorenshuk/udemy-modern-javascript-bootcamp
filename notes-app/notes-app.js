@@ -49,8 +49,3 @@ document.querySelector('#search-text').addEventListener('input', function (e) {
    renderNotes(notes, filters)
 })
 
-// Lesson 58: Event Listener for the Submit Create Note <button> on the <form id="name-form"> element
-document.querySelector('#name-form').addEventListener('submit', function (e) {
-    e.preventDefault()
-    console.log(e.target.elements.firstName.value)
-})
