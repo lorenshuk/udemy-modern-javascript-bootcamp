@@ -37,7 +37,7 @@ let filters = {
 let hideCompleted = false
 
 const renderTodos = function (todos, filters) {
-    const filteredTodos = todos.filter(function(todo) {
+    const filteredTodos = todos.filter(unction(todo) {
         return todo.text.toLowerCase().includes(filters.searchText.toLowerCase()) && (!filters.hideCompleted || !todo.completed)
     })
 
