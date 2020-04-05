@@ -14,9 +14,22 @@ const filters = {
 }
 
 // Lesson 62: localStorage
-localStorage.setItem('location', 'San Diego')
-console.log(localStorage.getItem('location'))
-localStorage.removeItem('location')
+const user = {
+   name: 'Billy',
+   age: 32
+}
+
+/*
+let userJSON = JSON.stringify(user)
+console.log(userJSON)
+localStorage.setItem('user', userJSON)
+*/
+
+/* Use this to retrieve the user */
+let userJSON = localStorage.getItem('user')
+let userObject = JSON.parse(userJSON)
+console.log(`${userObject.name} is ${userObject.age} years old.`)
+ console.log(userObject)
 
 const renderNotes = function (notes, filters) {
    const filteredNotes = notes.filter(function (note) {
