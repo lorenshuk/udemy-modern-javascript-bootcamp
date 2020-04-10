@@ -7,7 +7,8 @@
 // })
 
 // Lesson 51: Adding elements from an array
-const todos = [{
+let todos = []
+    /*
     text: 'Order cat food',
     completed: true
 }, {
@@ -23,6 +24,15 @@ const todos = [{
     text: 'Exercise more',
     completed: true
 }]
+*/
+
+/**********************
+ * Lesson 63: Check if there's anything in Local Storage
+ ***********************/
+let todoJSON = localStorage.getItem('todos')
+if (todoJSON !== null) {
+    todos = JSON.parse(todoJSON)
+}
 
 /*************************
  * Lesson 57: Add Filter
@@ -37,7 +47,7 @@ let filters = {
 let hideCompleted = false
 
 const renderTodos = function (todos, filters) {
-    const filteredTodos = todos.filter(unction(todo) {
+    const filteredTodos = todos.filter(function(todo) {
         return todo.text.toLowerCase().includes(filters.searchText.toLowerCase()) && (!filters.hideCompleted || !todo.completed)
     })
 
@@ -97,6 +107,8 @@ document.querySelector('#add-form').addEventListener('submit', function(e) {
         text: e.target.elements.addToDo.value,
         completed: false
     })
+    localStorage.setItem('todos', JSON.stringify(todos))
+
     renderTodos(todos, filters)
     e.target.elements.addToDo.value = ''
 })

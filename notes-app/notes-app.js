@@ -1,4 +1,4 @@
-const notes = [{
+let notes = [{
    title: 'My next fishing trip',
    body: 'I would like to hike my float tube to an alpine lake'
 }, {
@@ -9,11 +9,16 @@ const notes = [{
    body: 'GET ONE!!!'
 }]
 
-const filters = {
+let filters = {
    searchText: ''
 }
 
+// Lesson 63: Local Storage
+const notesJSON = localStorage.getItem('notes')
 
+if (notesJSON !== null) {
+   notes = JSON.parse(notesJSON)
+}
 
 const renderNotes = function (notes, filters) {
    const filteredNotes = notes.filter(function (note) {
@@ -24,7 +29,12 @@ const renderNotes = function (notes, filters) {
 
    filteredNotes.forEach(function (note) {
       const noteElement = document.createElement('p')
-      noteElement.textContent = note.title
+
+      if (note.title.length > 0){
+         noteElement.textContent = note.title
+      } else {
+         noteElement.textContent = '(Untitled Note)'
+      }
       document.querySelector('#notes').appendChild(noteElement)
    })
 }
@@ -32,19 +42,14 @@ const renderNotes = function (notes, filters) {
 renderNotes(notes, filters)
 
 document.querySelector('#create-note').addEventListener('click', function (e) {
-   e.target.textContent = 'Create Note Clicked'
+   notes.push({
+      title: '',
+      body: ''
+   })
+   localStorage.setItem('notes', JSON.stringify(notes))
+   renderNotes(notes, filters)
 })
    
-
-/* Lesson 58: Removed the button 3/25/20
-document.querySelector('#remove-all-notes').addEventListener('click', function (e) {
-   console.log('Remove All button clicked.')
-   document.querySelectorAll('.note').forEach(function(note) {
-      note.remove()
-   })
-})
-*/
-
 // Listen for the input filter handler
 document.querySelector('#search-text').addEventListener('input', function (e) {
    filters.searchText = e.target.value
