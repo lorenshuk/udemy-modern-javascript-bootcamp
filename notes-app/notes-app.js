@@ -13,32 +13,10 @@ let filters = {
    searchText: ''
 }
 
-// Lesson 63: Local Storage
-const notesJSON = localStorage.getItem('notes')
+// Retrieve the stored notes
+const notesJSON = getSavedNotes()
 
-if (notesJSON !== null) {
-   notes = JSON.parse(notesJSON)
-}
-
-const renderNotes = function (notes, filters) {
-   const filteredNotes = notes.filter(function (note) {
-      return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
-   })
-
-   document.querySelector('#notes').innerHTML = ''
-
-   filteredNotes.forEach(function (note) {
-      const noteElement = document.createElement('p')
-
-      if (note.title.length > 0){
-         noteElement.textContent = note.title
-      } else {
-         noteElement.textContent = '(Untitled Note)'
-      }
-      document.querySelector('#notes').appendChild(noteElement)
-   })
-}
-
+// Display each Note element to the DOM in a <p> element
 renderNotes(notes, filters)
 
 document.querySelector('#create-note').addEventListener('click', function (e) {
@@ -46,7 +24,7 @@ document.querySelector('#create-note').addEventListener('click', function (e) {
       title: '',
       body: ''
    })
-   localStorage.setItem('notes', JSON.stringify(notes))
+   saveNotes(notes)
    renderNotes(notes, filters)
 })
    
