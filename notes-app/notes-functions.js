@@ -16,14 +16,25 @@ const getSavedNotes = function() {
 }
 
 // Create the individual NOTE <p> element for the main page
-const getNoteDOM = function(note) {
-    const noteElement = document.createElement('p')
+const generateNoteDOM = function(note) {
+    const noteElement = document.createElement('div')
+    const textElement = document.createElement('span')
+    const button = document.createElement('button')
+
+    // REMOVE Note button
+    button.textContent = 'x'
+    noteElement.appendChild(button)
     
+    // Note Text/Title
     if (note.title.length > 0) {
-        noteElement.textContent = note.title
+        textElement.textContent = note.title
     } else {
-        noteElement.textContent = '(Untitled Note)'
+        textElement.textContent = '(Untitled Note)'
     }
+    
+    // Add Title Text to the <div>
+    noteElement.appendChild(textElement)
+
     return noteElement
 }
 
@@ -36,7 +47,7 @@ const renderNotes = function (notes, filters) {
     document.querySelector('#notes').innerHTML = ''
 
     filteredNotes.forEach(function (note) {
-        const noteElement = getNoteDOM(note)
+        const noteElement = generateNoteDOM(note)
         document.querySelector('#notes').appendChild(noteElement)
     })
 }

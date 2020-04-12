@@ -5,7 +5,7 @@ const getSavedTodos = function () {
     if (todoJSON !== null) {
         return JSON.parse(todoJSON)
     } else {
-        return [s]
+        return []
     }
 }
 
@@ -31,13 +31,28 @@ const renderTodos = function (todos, filters) {
  
 // Get the DOM elements for an individual DOM
 const generateTodoDOM = function(todo) {
-    const newParagraph = document.createElement('p')
+    const todoElement = document.createElement('div')
+    const todoCheck = document.createElement('input')
+    const todoButton = document.createElement('button')
+    const todoText = document.createElement('span')
+
+    // Completed Check Box
+    todoCheck.setAttribute('type', 'checkbox')
+    todoElement.appendChild(todoCheck)
+
+    // To Do Text
     let newText = todo.text
     if (!todo.completed) {
         newText = `*${newText}`
     }
-    newParagraph.textContent = newText
-    return newParagraph
+    todoText.textContent = newText
+    todoElement.appendChild(todoText)
+
+    // Delete Button
+    todoButton.textContent = 'x'
+    todoElement.appendChild(todoButton)
+    
+    return todoElement
 }
 
 // Get the DOM elements for the list summary
@@ -49,7 +64,10 @@ const generateSummaryDOM = function (filteredTodos) {
         return !todo.completed
     })
 
-    if (!incompleteToDos.length) {
+    if (todos.length === 0) {
+        summary.textContent = `No TO DO's entered`
+    }
+    else if (!incompleteToDos.length) {
         summary.textContent = `All Filtered TO DO's Completed! Good work!`
     } else {
         summary.textContent = `*You have ${incompleteToDos.length} TO DO's left`

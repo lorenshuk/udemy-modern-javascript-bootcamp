@@ -1,4 +1,5 @@
-let notes = [{
+let notes = []
+/*
    title: 'My next fishing trip',
    body: 'I would like to hike my float tube to an alpine lake'
 }, {
@@ -8,6 +9,7 @@ let notes = [{
    title: 'Career',
    body: 'GET ONE!!!'
 }]
+*/
 
 let filters = {
    searchText: ''
@@ -21,6 +23,7 @@ renderNotes(notes, filters)
 
 document.querySelector('#create-note').addEventListener('click', function (e) {
    notes.push({
+      id: uuidv4(),
       title: '',
       body: ''
    })
