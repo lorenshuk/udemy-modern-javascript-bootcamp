@@ -15,6 +15,16 @@ const getSavedNotes = function() {
     }
 }
 
+const removeNote = function (id) {
+    const noteIndex = notes.findIndex(function(note) {
+        return note.id === id
+    })
+
+    if (noteIndex > -1) {
+        notes.splice(noteIndex, 1)
+    }
+}
+
 // Create the individual NOTE <p> element for the main page
 const generateNoteDOM = function(note) {
     const noteElement = document.createElement('div')
@@ -24,6 +34,11 @@ const generateNoteDOM = function(note) {
     // REMOVE Note button
     button.textContent = 'x'
     noteElement.appendChild(button)
+    button.addEventListener('click', function (e) {
+        removeNote(note.id)
+        saveNotes(notes)
+        renderNotes(notes, filters)
+    })
     
     // Note Text/Title
     if (note.title.length > 0) {

@@ -24,7 +24,7 @@ renderNotes(notes, filters)
 document.querySelector('#create-note').addEventListener('click', function (e) {
    notes.push({
       id: uuidv4(),
-      title: '',
+      title: `(Untitled Note)`,
       body: ''
    })
    saveNotes(notes)
