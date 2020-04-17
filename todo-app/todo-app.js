@@ -53,7 +53,6 @@ document.querySelector('#add-form').addEventListener('submit', function(e) {
         text: e.target.elements.addToDo.value,
         completed: false
     })
-    console.log(todos)
     saveTodos(todos)
 
     renderTodos(todos, filters)

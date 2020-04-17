@@ -34,7 +34,7 @@ const removeToDo = (id) => {
         return todo.id === id
     })
 
-   if (todiIndex > -1) {
+   if (todoIndex > -1) {
        todos.splice(todoIndex, 1)
    }
 }
