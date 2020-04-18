@@ -39,6 +39,17 @@ const removeToDo = (id) => {
    }
 }
 
+const toggleToDo = (id) => {
+    const todo = todos.find((el) => {
+        return el.id === id
+    })
+
+    if (todo !== undefined) {
+        console.log(`[removedToDo()] todo:${todo}`)
+        todo.completed = !todo.completed
+    }
+}
+
 // Get the DOM elements for an individual DOM
 const generateTodoDOM = function(todo) {
     const todoElement = document.createElement('div')
@@ -48,21 +59,17 @@ const generateTodoDOM = function(todo) {
 
     // Completed Check Box
     todoCheck.setAttribute('type', 'checkbox')
+    todoCheck.checked = todo.completed
     todoElement.appendChild(todoCheck)
-    todoCheck.addEventListener('click', () => {
-        todo.completed = !todo.completed
+    todoCheck.addEventListener('change', () => {
+        toggleToDo(todo.id)
+       // todo.completed = !todo.completed
         saveTodos(todos)
         renderTodos(todos, filters)
     })
-    if (todo.completed) {
-        todoCheck.checked = true
-    }
 
     // To Do Text
     let newText = todo.text
-    if (!todo.completed) {
-        newText = `*${newText}`
-    }
     todoText.textContent = newText
     todoElement.appendChild(todoText)
 
