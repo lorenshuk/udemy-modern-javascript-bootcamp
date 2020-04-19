@@ -28,26 +28,27 @@ const removeNote = function (id) {
 // Create the individual NOTE <p> element for the main page
 const generateNoteDOM = function(note) {
     const noteElement = document.createElement('div')
-    const textElement = document.createElement('span')
+    const textElement = document.createElement('a')
     const button = document.createElement('button')
 
     // REMOVE Note button
     button.textContent = 'x'
     noteElement.appendChild(button)
-    button.addEventListener('click', function (e) {
+    button.addEventListener('click', function () {
         removeNote(note.id)
         saveNotes(notes)
         renderNotes(notes, filters)
     })
     
-    // Note Text/Title
+    // Note\Anchor Text/Title
     if (note.title.length > 0) {
-        textElement.textContent = note.title
+        textElement.innerHTML = note.title
     } else {
-        textElement.textContent = '(Untitled Note)'
+        textElement.innerHTML = '(Untitled Note)'
     }
     
     // Add Title Text to the <div>
+    textElement.setAttribute('href', `/edit.html#${note.id}`)
     noteElement.appendChild(textElement)
 
     return noteElement

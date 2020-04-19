@@ -22,13 +22,20 @@ const notesJSON = getSavedNotes()
 renderNotes(notes, filters)
 
 document.querySelector('#create-note').addEventListener('click', function (e) {
+   
+   console.log('create note line 26')
+   
+   const noteID = uuidv4()
+   
    notes.push({
-      id: uuidv4(),
+      id:noteID,
       title: `(Untitled Note)`,
       body: ''
    })
+   
+   console.log('create note line 36')
    saveNotes(notes)
-   renderNotes(notes, filters)
+   location.assign(`/edit.html#${noteID}`)
 })
    
 // Listen for the input filter handler
