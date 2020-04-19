@@ -1,15 +1,4 @@
 let notes = []
-/*
-   title: 'My next fishing trip',
-   body: 'I would like to hike my float tube to an alpine lake'
-}, {
-   title: 'Habit to work on',
-   body: 'Eat more plant-based diet'
-}, {
-   title: 'Career',
-   body: 'GET ONE!!!'
-}]
-*/
 
 let filters = {
    searchText: ''
@@ -22,9 +11,6 @@ const notesJSON = getSavedNotes()
 renderNotes(notes, filters)
 
 document.querySelector('#create-note').addEventListener('click', function (e) {
-   
-   console.log('create note line 26')
-   
    const noteID = uuidv4()
    
    notes.push({
@@ -33,7 +19,6 @@ document.querySelector('#create-note').addEventListener('click', function (e) {
       body: ''
    })
    
-   console.log('create note line 36')
    saveNotes(notes)
    location.assign(`/edit.html#${noteID}`)
 })

@@ -1,7 +1,7 @@
-// Retrieve the notes object from localStorage
-const getSavedNotes = function() {
+// Read existing notes from localStorage
+const getSavedNotes = function () {
     const notesJSON = localStorage.getItem('notes')
-    
+
     if (notesJSON !== null) {
         return JSON.parse(notesJSON)
     } else {
@@ -9,13 +9,14 @@ const getSavedNotes = function() {
     }
 }
 
-// Save notes
-const saveNotes = function(notes) {
+// Save the notes to localStorage
+const saveNotes = function (notes) {
     localStorage.setItem('notes', JSON.stringify(notes))
 }
 
+// Remove a note from the list
 const removeNote = function (id) {
-    const noteIndex = notes.findIndex(function(note) {
+    const noteIndex = notes.findIndex(function (note) {
         return note.id === id
     })
 
@@ -24,36 +25,34 @@ const removeNote = function (id) {
     }
 }
 
-// Create the individual NOTE <p> element for the main page
-const generateNoteDOM = function(note) {
-    const noteElement = document.createElement('div')
-    const textElement = document.createElement('a')
+// Generate the DOM structure for a note
+const generateNoteDOM = function (note) {
+    const noteEl = document.createElement('div')
+    const textEl = document.createElement('a')
     const button = document.createElement('button')
 
-    // REMOVE Note button
+    // Setup the remove note button
     button.textContent = 'x'
-    noteElement.appendChild(button)
+    noteEl.appendChild(button)
     button.addEventListener('click', function () {
         removeNote(note.id)
         saveNotes(notes)
         renderNotes(notes, filters)
     })
-    
-    // Note\Anchor Text/Title
-    if (note.title.length > 0) {
-        textElement.innerHTML = note.title
-    } else {
-        textElement.innerHTML = 'Untitled Note'
-    }
-    
-    // Add Title Text to the <div>
-    textElement.setAttribute('href', `/edit.html#${note.id}`)
-    noteElement.appendChild(textElement)
 
-    return noteElement
+    // Setup the note title text
+    if (note.title.length > 0) {
+        textEl.textContent = note.title
+    } else {
+        textEl.textContent = 'Unnamed note'
+    }
+    textEl.setAttribute('href', `/edit.html#${note.id}`)
+    noteEl.appendChild(textEl)
+
+    return noteEl
 }
 
-// Render the Note entries
+// Render application notes
 const renderNotes = function (notes, filters) {
     const filteredNotes = notes.filter(function (note) {
         return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
@@ -62,7 +61,7 @@ const renderNotes = function (notes, filters) {
     document.querySelector('#notes').innerHTML = ''
 
     filteredNotes.forEach(function (note) {
-        const noteElement = generateNoteDOM(note)
-        document.querySelector('#notes').appendChild(noteElement)
+        const noteEl = generateNoteDOM(note)
+        document.querySelector('#notes').appendChild(noteEl)
     })
 }
