@@ -1,11 +1,9 @@
-let notes = []
+// Retrieve the stored notes
+const notes = getSavedNotes()
 
 let filters = {
    searchText: ''
 }
-
-// Retrieve the stored notes
-const notesJSON = getSavedNotes()
 
 // Display each Note element to the DOM in a <p> element
 renderNotes(notes, filters)
@@ -18,7 +16,7 @@ document.querySelector('#create-note').addEventListener('click', function (e) {
       title: `(Untitled Note)`,
       body: ''
    })
-   
+
    saveNotes(notes)
    location.assign(`/edit.html#${noteID}`)
 })
