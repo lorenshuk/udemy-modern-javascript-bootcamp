@@ -33,3 +33,7 @@ removeButton.addEventListener('click', e => {
     saveNotes(notes)
     location.assign('/index.html')
 })
+
+window.addEventListener('storage', (e) => {
+    console.log('Local Storage change')
+})
