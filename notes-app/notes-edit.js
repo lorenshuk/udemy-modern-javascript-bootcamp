@@ -3,9 +3,9 @@ const titleElement = document.querySelector('#note-title')
 const bodyElement = document.querySelector('#note-body')
 const removeButton = document.querySelector('#remove-note')
 
-const noteId = location.hash.substring(1)
-const notes = getSavedNotes()
-const note = notes.find(eNote => {
+let noteId = location.hash.substring(1)
+let notes = getSavedNotes()
+let note = notes.find(eNote => {
     return eNote.id === noteId
 })
 
@@ -35,5 +35,18 @@ removeButton.addEventListener('click', e => {
 })
 
 window.addEventListener('storage', (e) => {
-    console.log('Local Storage change')
+    if (e.key === 'notes') {
+        notes = JSON.parse(e.newValue)
+        note = notes.find(eNote => {
+            return eNote.id === noteId
+        })
+    
+        /* Populate the Elements */
+        if (note === undefined) {
+            location.assign('/index.html')
+        }
+    
+        titleElement.value = note.title
+        bodyElement.value = note.body
+    }
 })
