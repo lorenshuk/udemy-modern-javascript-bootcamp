@@ -10,11 +10,14 @@ renderNotes(notes, filters)
 
 document.querySelector('#create-note').addEventListener('click', function (e) {
    const noteID = uuidv4()
-   
+   const timeStamp = moment().valueOf()
+
    notes.push({
       id:noteID,
       title: ``,
-      body: ''
+      body: '',
+      createdAt: timeStamp,
+      updatedAt: timeStamp
    })
 
    saveNotes(notes)
@@ -79,7 +82,8 @@ if (timeStamp1 < timeStamp2) {
 }
 */
 
-/* Lesson 75: MOMENT Library */
+/* Lesson 75: MOMENT Library
 //let momDate = moment([1967, 0, 25])
 let momDate = moment().year(1925).month(11).date(25)
 console.log(momDate.format('MMM D, YYYY'))
+ */
