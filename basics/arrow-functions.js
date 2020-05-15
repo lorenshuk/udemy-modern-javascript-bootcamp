@@ -1,4 +1,4 @@
-const square = (num) => {
+/* const square = (num) => {
     return num * num
 }
 
@@ -24,4 +24,30 @@ const under22 = people.filter((person) => person.age < 22)
 console.log(under30)
 console.log(over30)
 
-under22.forEach(person => console.log(person.name))
+under22.forEach(person => console.log(person.name)) */
+
+/* 
+const add = function (a, b) {
+    console.log(arguments)
+}
+
+add(10, 20, 30, 40)
+ */
+
+ const car = {
+    color: 'Red',
+    interior: 'Leather',
+    engine: 'V8',
+    getColor: function () {
+        return `The color is ${this.color}.`
+    },
+    getInterior: () => {
+        return `The interior is ${this.interior}`
+    },
+    getEngine() {
+        return `The engine is a ${this.engine}`
+    }
+}
+console.log(car.getColor())
+console.log(car.getInterior())
+console.log(car.getEngine())
