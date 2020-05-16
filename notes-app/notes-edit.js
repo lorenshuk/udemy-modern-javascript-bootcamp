@@ -6,9 +6,7 @@ const removeButton = document.querySelector('#remove-note')
 
 let noteId = location.hash.substring(1)
 let notes = getSavedNotes()
-let note = notes.find(eNote => {
-    return eNote.id === noteId
-})
+let note = notes.find(eNote => eNote.id === noteId)
 
     /* Populate the Elements */
 if (note === undefined) {
@@ -40,12 +38,10 @@ removeButton.addEventListener('click', e => {
     location.assign('/index.html')
 })
 
-window.addEventListener('storage', (e) => {
+window.addEventListener('storage', e => {
     if (e.key === 'notes') {
         notes = JSON.parse(e.newValue)
-        note = notes.find(eNote => {
-            return eNote.id === noteId
-        })
+        note = notes.find(eNote =>eNote.id === noteId)
     
         /* Populate the Elements */
         if (note === undefined) {

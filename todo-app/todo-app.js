@@ -41,12 +41,12 @@ let hideCompleted = false
 renderTodos(todos, filters)
 
  // Lesson 57: Listener for the Filter Challenge
-document.querySelector('#filtertodos').addEventListener('input', function(e) {
+document.querySelector('#filtertodos').addEventListener('input', e => {
     filters.searchText = e.target.value
     renderTodos(todos, filters)
 })
 
-document.querySelector('#add-form').addEventListener('submit', function(e) {
+document.querySelector('#add-form').addEventListener('submit', e => {
     e.preventDefault()
     todos.push({
         id: uuidv4(),
@@ -60,7 +60,7 @@ document.querySelector('#add-form').addEventListener('submit', function(e) {
 })
 
 // Lesson 59: Add checkbox & Event Listeners
-document.querySelector('#hide-completed').addEventListener('change', function (e) {
+document.querySelector('#hide-completed').addEventListener('change', e => {
     filters.hideCompleted = e.target.checked
     renderTodos(todos, filters)
 })

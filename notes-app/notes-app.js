@@ -10,7 +10,7 @@ let filters = {
 // Display each Note element to the DOM in a <p> element
 renderNotes(notes, filters)
 
-document.querySelector('#create-note').addEventListener('click', function (e) {
+document.querySelector('#create-note').addEventListener('click', e => {
    const noteID = uuidv4()
    const timeStamp = moment().valueOf()
 
@@ -27,12 +27,12 @@ document.querySelector('#create-note').addEventListener('click', function (e) {
 })
    
 // Listen for the input filter handler
-document.querySelector('#search-text').addEventListener('input', function (e) {
+document.querySelector('#search-text').addEventListener('input', e => {
    filters.searchText = e.target.value
    renderNotes(notes, filters)
 })
 
-document.querySelector('#filter-by').addEventListener('change', function (e) {
+document.querySelector('#filter-by').addEventListener('change', e => {
    filters.sortBy = e.target.value
    renderNotes(notes, filters)
 })
