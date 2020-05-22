@@ -245,5 +245,23 @@ console.log(lastName)
 */
 
 // Quirk 3: No value assignment
-console.log(quirk3)
-let quirk3
+/* console.log(quirk3)
+let quirk3 */
+
+// LESSON 82: Conditional(Ternary) Operator
+/* const myAge = 30
+
+const showPage = () => {
+    return 'Show the page'
+}
+
+const showErrorPage = () => {
+    return 'Show the ERROR page'
+}
+
+msg = myAge > 21 ? showPage() : showErrorPage()
+console.log(msg)
+ */
+const team = ['Tyler', 'Porter', 'Mike', 'Lundy', 'Token']
+
+console.log(team.length <= 4 ? `Team size: ${team.length}` : 'Too many people on your team (Over 4)')
