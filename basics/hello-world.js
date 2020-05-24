@@ -261,7 +261,18 @@ const showErrorPage = () => {
 
 msg = myAge > 21 ? showPage() : showErrorPage()
 console.log(msg)
- */
-const team = ['Tyler', 'Porter', 'Mike', 'Lundy', 'Token']
+ onst team = ['Tyler', 'Porter', 'Mike', 'Lundy', 'Token']
 
 console.log(team.length <= 4 ? `Team size: ${team.length}` : 'Too many people on your team (Over 4)')
+*/
+
+
+/* Lesson 83: Truthy Falsie */
+const products = []
+const product = products[0]
+
+if ({}) {
+    console.log('Product found')
+} else {
+    console.log('Product not found')
+}

@@ -9,7 +9,7 @@ let notes = getSavedNotes()
 let note = notes.find(eNote => eNote.id === noteId)
 
     /* Populate the Elements */
-if (note === undefined) {
+if (!note) {
     location.assign('/index.html')
 }
 
@@ -41,10 +41,10 @@ removeButton.addEventListener('click', e => {
 window.addEventListener('storage', e => {
     if (e.key === 'notes') {
         notes = JSON.parse(e.newValue)
-        note = notes.find(eNote =>eNote.id === noteId)
+        note = notes.find(eNote => eNote.id === noteId)
     
         /* Populate the Elements */
-        if (note === undefined) {
+        if (!note) {
             location.assign('/index.html')
         }
     

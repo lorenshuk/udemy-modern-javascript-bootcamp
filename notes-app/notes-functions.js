@@ -37,7 +37,7 @@ const generateNoteDOM = note => {
     })
     
     // Note\Anchor Text/Title
-    if (note.title.length > 0) {
+    if (note.title.length) {
         textElement.innerHTML = note.title
     } else {
         textElement.innerHTML = 'Untitled Note'

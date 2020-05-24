@@ -33,7 +33,7 @@ const removeToDo = (id) => {
 const toggleToDo = id => {
     const todo = todos.find(el => el.id === id)
 
-    if (todo !== undefined) {
+    if (todo) {
         console.log(`[removedToDo()] todo:${todo}`)
         todo.completed = !todo.completed
     }
@@ -81,7 +81,7 @@ const generateSummaryDOM = filteredTodos => {
     // Count up the incomplete TO DO's
     const incompleteToDos = filteredTodos.filter(todo => !todo.completed)
 
-    if (todos.length === 0) {
+    if (!todos.length) {
         summary.textContent = `No TO DO's entered`
     }
     else if (!incompleteToDos.length) {
