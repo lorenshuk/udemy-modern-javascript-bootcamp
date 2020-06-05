@@ -1,3 +1,5 @@
+'use strict'
+
 // Retrieve the stored notes
 let notes = getSavedNotes()
 

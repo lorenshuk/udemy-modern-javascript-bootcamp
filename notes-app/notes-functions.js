@@ -1,8 +1,21 @@
+'use strict'
+
+const processData = () => {
+    data = '134324234'
+}
+processData()
+console.log(data)
+
 // Retrieve the notes object from localStorage
 const getSavedNotes = () => {
     const notesJSON = localStorage.getItem('notes')
     
-    return notesJSON !== null ? JSON.parse(notesJSON) : []
+    // Check for invalid JSON input
+    try {
+        return notesJSON !== null ? JSON.parse(notesJSON) : []
+    } catch {
+        return []
+    }
 
 }
 

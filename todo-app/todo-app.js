@@ -1,3 +1,5 @@
+'use strict'
+
 // const paragraphs = document.querySelectorAll('p')
 
 // paragraphs.forEach((paragraph) => {
