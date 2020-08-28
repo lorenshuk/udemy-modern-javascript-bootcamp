@@ -6,7 +6,7 @@ class Hangman {
         this.status = 'Playing'
     }
 
-    getPuzzle () {
+    get puzzle () {
         let guessShow = ''
         let winner = true
         const wordArray = this.guessWord.toLowerCase().split('')
@@ -41,6 +41,8 @@ class Hangman {
         this.getStatus()
     }
 
+    
+    /* Lesson 98 */
     getStatus () {
         let winner = true
         const wordArray = this.guessWord.toLowerCase().split('')
@@ -54,22 +56,19 @@ class Hangman {
                 }
             });
 
-            console.log(`getStatus: ${winner}`)
-
             if (winner)
                 this.status = 'Finished'
             else
                 this.status = 'Playing'
         }
+        
+        return this.status
     }
 
-    /* Lesson 98 */
-    statusMessage (status) {
+    get statusMessage () {
         let returnString = ''
 
-        console.log(`statusMessage: ${status}`)
-
-        switch (status) {
+        switch (this.status) {
             case 'Failed':
                 returnString = `Nice try! The word was ${this.guessWord}.`;
                 break;
