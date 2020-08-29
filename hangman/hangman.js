@@ -8,17 +8,15 @@ class Hangman {
 
     get puzzle () {
         let guessShow = ''
-        let winner = true
-        const wordArray = this.guessWord.toLowerCase().split('')
+        const wordArray = this.guessWord.split('')
 
         wordArray.forEach(letter => {
             if (letter === ' ') {
                 guessShow += ' '
-            } else if (this.guessedLetters.includes(letter)) {
+            } else if (this.guessedLetters.includes(letter.toLowerCase())) {
                 guessShow += letter;
             } else {
                 guessShow += '*'
-                winner = false
             }
         });
 
