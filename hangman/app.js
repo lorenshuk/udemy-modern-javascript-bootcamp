@@ -20,41 +20,26 @@ window.addEventListener('keypress', (e) => {
     }
 })
 
-/*** Lesson 104: HTTP Requests ***/
-// Retrieve a random phrase
-const request = new XMLHttpRequest()
 
-// Create an Event Listener to store the phrase
-request.addEventListener('readystatechange', (e) => {
-    if (e.target.readyState === 4 && e.target.status === 200) {
-        // responseText property - JSON value that is returned by the XMLHttpRequest()
-        const data = e.target.responseText
-        console.log(data)
+/*** Lesson 107: Callback function  ***/
+getPuzzle('3', (error, puzzle) => {
+    if (error) {
+        console.log(error)
+    } else {
+        console.log(`Puzzle: ${puzzle}`)
     }
 })
-// Open the link
-request.open('GET', 'http://puzzle.mead.io/puzzle')
-request.send() 
 
+/*** Lesson 108: Use the Aync version for testing\example */
+// const puzzle = getPuzzleSync()
+// console.log(puzzle)
 
-/** Lesson 106 - REST Country API ***/
+/*** Lesson 109: Create getCountry() function 8/29/20 3:49 PM ***/
 const countryCode = 'US'
-const countryRequest = new XMLHttpRequest()
-
-countryRequest.addEventListener('readystatechange', (e) => {
-    if (e.target.readyState == 4 && e.target.status === 200) {
-        const data = JSON.parse(e.target.responseText)
-        /* Use find() instead, since it returns the first object found in the array, and NOT a whole array of objects
-        const result = data.filter(obj => {
-            return obj.alpha2Code === countryCode;
-        })
-        */
-        const result = data.find((country) => country.alpha2Code === countryCode)
-        console.log(result.name)
-    } else if (e.target.readyState === 400) {
-        console.log('An error has occurred on GET')
+getCountry(countryCode, (countryName, error) => {
+    if (error) {
+        console.log(`Error: ${error}`)
+    } else {
+        console.log(`Country Name: ${countryName}`)
     }
 })
-
-countryRequest.open('GET', 'http://restcountries.eu/rest/v2/all')
-countryRequest.send() 
