@@ -9,7 +9,7 @@ const getPuzzle = (wordCount) => new Promise((resolve, reject) => {
             const data = JSON.parse(e.target.responseText)
             resolve(data.puzzle)
         } else if (e.target.readyState === 4) {
-            reject('An error has occurred in getPuzzle().')
+            reject('An error has occurred.')
         }
     })
     // Open the link
@@ -28,29 +28,29 @@ const getPuzzleSync = () => {
         const data = JSON.parse(request.responseText)
         return data.puzzle
     } else if (request.readyState === 4) {
-        throw new Error('Error occurred on HTTP request in getPuzzleSync().')
+        throw new Error('Error occurred on HTTP request.')
     }
 }
 
 /** Lesson 106 - REST Country API ***/
 /** Lessone 109 - Create the getCountry function 8/29/20 3:45 PM */
 /** Lesson 112 - Convert to Promise() architecture (ASYNC) 9/14/20 5:36 PM */
-const getCountry = (countryCode) => new Promise((resolve, reject) => {
+const getCountry = (countryCode, callback) => {
     const countryRequest = new XMLHttpRequest()
 
     countryRequest.addEventListener('readystatechange', (e) => {
         if (e.target.readyState == 4 && e.target.status === 200) {
             const data = JSON.parse(e.target.responseText)
             const result = data.find((country) => country.alpha2Code === countryCode)
-            resolve(result.name)
-        } else if (e.target.status >= 400) {
-            reject(`getCountry() HTTP Request status: ${e.target.status}`)
+            callback(result.name, undefined)
+        } else if (e.target.readyState === 400) {
+            callback(undefined, 'Error has occured on HTTP API Request')
         }
     })
 
     countryRequest.open('GET', 'http://restcountries.eu/rest/v2/all')
     countryRequest.send() 
-})
+}
     
 
 /*** Lesson 104: HTTP Requests ***/
