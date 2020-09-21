@@ -1,21 +1,34 @@
 /*** 9/14/20 Update to a Promise frameword ***/
-const getPuzzle = (wordCount) => new Promise((resolve, reject) => {
-    const request = new XMLHttpRequest()
+    /*** 9/21/20 (L113) Replace with Fetch API code
+    const getPuzzle = (wordCount) => new Promise((resolve, reject) => {
+        const request = new XMLHttpRequest()
 
-    // Create an Event Listener to store the phrase
-    request.addEventListener('readystatechange', (e) => {
-        if (e.target.readyState === 4 && e.target.status === 200) {
-            // responseText property - JSON value that is returned by the XMLHttpRequest()
-            const data = JSON.parse(e.target.responseText)
-            resolve(data.puzzle)
-        } else if (e.target.readyState === 4) {
-            reject('An error has occurred in getPuzzle().')
+        // Create an Event Listener to store the phrase
+        request.addEventListener('readystatechange', (e) => {
+            if (e.target.readyState === 4 && e.target.status === 200) {
+                // responseText property - JSON value that is returned by the XMLHttpRequest()
+                const data = JSON.parse(e.target.responseText)
+                resolve(data.puzzle)
+            } else if (e.target.readyState === 4) {
+                reject('An error has occurred in getPuzzle().')
+            }
+        })
+        // Open the link
+        request.open('GET', `http://puzzle.mead.io/puzzle?wordCount=${wordCount}`)
+        request.send() 
+    }) 
+    *** 9/21 Replacement ends here... ***/
+const getPuzzle = (wordCount) => {
+    return fetch('http://puzzle.mead.io/puzzle?wordCount=${wordCount}').then((response) => {
+        if (response.status === 200) {
+            return response.json()
+        } else {
+            throw new Error('Error fetching the puzzle')
         }
+    }).then((data) => {
+        return data.puzzle
     })
-    // Open the link
-    request.open('GET', `http://puzzle.mead.io/puzzle?wordCount=${wordCount}`)
-    request.send() 
-})
+}
 
 const getPuzzleSync = () => {
     const request = new XMLHttpRequest()
