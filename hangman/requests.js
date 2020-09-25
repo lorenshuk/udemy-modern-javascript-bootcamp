@@ -48,23 +48,36 @@ const getPuzzleSync = () => {
 /** Lesson 106 - REST Country API ***/
 /** Lessone 109 - Create the getCountry function 8/29/20 3:45 PM */
 /** Lesson 112 - Convert to Promise() architecture (ASYNC) 9/14/20 5:36 PM */
-const getCountry = (countryCode) => new Promise((resolve, reject) => {
-    const countryRequest = new XMLHttpRequest()
+/** Lesson 115 - Rewrite the function to use Fetch() API
+    const getCountry = (countryCode) => new Promise((resolve, reject) => {
+        const countryRequest = new XMLHttpRequest()
 
-    countryRequest.addEventListener('readystatechange', (e) => {
-        if (e.target.readyState == 4 && e.target.status === 200) {
-            const data = JSON.parse(e.target.responseText)
-            const result = data.find((country) => country.alpha2Code === countryCode)
-            resolve(result.name)
-        } else if (e.target.status >= 400) {
-            reject(`getCountry() HTTP Request status: ${e.target.status}`)
-        }
+        countryRequest.addEventListener('readystatechange', (e) => {
+            if (e.target.readyState == 4 && e.target.status === 200) {
+                const data = JSON.parse(e.target.responseText)
+                const result = data.find((country) => country.alpha2Code === countryCode)
+                resolve(result.name)
+            } else if (e.target.status >= 400) {
+                reject(`getCountry() HTTP Request status: ${e.target.status}`)
+            }
+        })
+
+        countryRequest.open('GET', 'http://restcountries.eu/rest/v2/all')
+        countryRequest.send() 
     })
-
-    countryRequest.open('GET', 'http://restcountries.eu/rest/v2/all')
-    countryRequest.send() 
-})
-    
+***/
+const getCountry = (countryCode) => {
+    return fetch('http://restcountries.eu/rest/v2/all').then((response) => {
+        if (response.status === 200) {
+            return response.json()
+        } else {
+            throw new Error('Could not retrieve country data')
+        }
+    }).then((data) => {
+        const country = data.find((country) => country.alpha2Code === countryCode)
+        return country.name
+    })
+}
 
 /*** Lesson 104: HTTP Requests ***/
 // // Retrieve a random phrase

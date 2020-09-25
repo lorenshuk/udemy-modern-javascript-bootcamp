@@ -34,10 +34,10 @@ getPuzzle('3').then((puzzle) => {
 
 /*** Lesson 109: Create getCountry() function 8/29/20 3:49 PM ***/
 /*** Lesson 112: Convert to Promise() architecture (ASYNC)   */
-const countryCode = 'US'
+const countryCode = 'xx'
 getCountry(countryCode).then((countryName) => {
     console.log(`Country Name: ${countryName}`)
-}, (err) => {
+}).catch((err) => {
     console.log(`Error: ${err}`)
 })
 
