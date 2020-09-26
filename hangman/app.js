@@ -34,12 +34,14 @@ getPuzzle('3').then((puzzle) => {
 
 /*** Lesson 109: Create getCountry() function 8/29/20 3:49 PM ***/
 /*** Lesson 112: Convert to Promise() architecture (ASYNC)   */
-const countryCode = 'xx'
+/*
+const countryCode = 'US'
 getCountry(countryCode).then((countryName) => {
     console.log(`Country Name: ${countryName}`)
 }).catch((err) => {
     console.log(`Error: ${err}`)
 })
+*/
 
 /*** 9/21/20(L113) Fetch API - Promises 
 // (1) Create a new method at the bottom of the file
@@ -59,3 +61,19 @@ fetch('http://puzzle.mead.io/puzzle', {}).then((response) => {
     console.log(error)
 })
 9/21/20 Test code ***/
+
+// Lesson 116: getLocation challenge with IPInfo.io 9/25/20
+getLocation().then((ioData) => {
+    console.log(`City: ${ioData.city}, Region: ${ioData.region}, Country: ${ioData.country}`)
+}).catch((err) => {
+    console.log(`Error: ${err}`)
+})
+
+// Chain promises to get the country's full name from getCountry()
+getLocation().then((ioData) => {
+    return getCountry(ioData.country)
+}).then((country) => {
+    console.log(`getLocation Chain Challenge: Country Name = ${country}`)
+}).catch((err) => {
+    console.log('getLocationChain: ${err}')
+})
