@@ -1,0 +1,9 @@
+/* Lesson 121: Add CSS styling to the Hangman App 10/21/20 */
+#puzzle, button {
+    color: red; 
+}
+
+/* .warning {
+    color: white;
+    background: red;
+} */

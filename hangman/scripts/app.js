@@ -29,4 +29,3 @@ document.querySelector('#reset').addEventListener('click', startGame)
 
 // L118.2 Start the game right off the bat
 startGame()
-console.log('')
