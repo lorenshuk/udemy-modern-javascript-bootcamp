@@ -12,9 +12,21 @@ window.addEventListener('keypress', (e) => {
 
 // L118.2.3 Create a function to render the # of attempts
 // - called from startGame()
+// L122 - Challenge: Fill the puzzleEL element with innerHTML string of a <span> for each letter in the 
+// Puzzle solution - 10/25/20
 const render = () => {
-    puzzleEl.textContent = game1.puzzle
+    puzzleEl.innerHTML = ``
     guessesEl.textContent = game1.statusMessage
+
+    // L122: Create a <span> for each letter - 10/25/20
+    const puzzleText = game1.puzzle
+    let puzzleSpan = ``
+
+    for (let i = 0; i < puzzleText.length; i++) {
+        puzzleSpan = puzzleSpan + `<span>` + puzzleText.charAt(i) + `</span>`
+    }
+    puzzleEl.innerHTML = puzzleSpan
+
 }
 
  /*** Lesson 118.2 Integrate Data into Hangman - 10/18/20 */
