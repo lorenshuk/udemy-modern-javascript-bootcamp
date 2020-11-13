@@ -1,15 +1,16 @@
 'use strict'
 
 const processData = () => {
-    data = '134324234'
+    let data = '134324234'
 }
-processData()
-console.log(data)
+
+// processData()
+//console.log(data)
 
 // Retrieve the notes object from localStorage
-const getSavedNotes = () => {
+function getSavedNotes() {
     const notesJSON = localStorage.getItem('notes')
-    
+
     // Check for invalid JSON input
     try {
         return notesJSON !== null ? JSON.parse(notesJSON) : []
