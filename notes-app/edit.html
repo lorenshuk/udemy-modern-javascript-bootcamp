@@ -6,9 +6,21 @@
 </head>
 
 <body>
-    <a href="/index.html">Home</a>
+    <div class="header">
+        <div class="container">
+            <h1 class="header__title">Edit Notes</h1>
+            <h2 class="header__subtitle"></h2>
+        </div>
+    </div>
+
+    <div class="actions">
+        <div class="actions_container actions__container--spaced">
+            <a href="/index.html">Home</a>
+            <span id="note-edited"></span>
+        </div>
+    </div>
+
     <input id="note-title" placeholder="Note title">
-    <span id="note-edited"></span>
     <textarea id="note-body" placeholder="Enter note text"></textarea>
     <button id="remove-note">Remove note</button>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
