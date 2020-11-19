@@ -37,8 +37,10 @@ const removeNote = id => {
 
 // Create the individual NOTE <p> element for the main page
 const generateNoteDOM = note => {
-    const noteElement = document.createElement('div')
-    const textElement = document.createElement('a')
+    const noteElement = document.createElement('a')
+    const textElement = document.createElement('p')
+    const statusElement = document.createElement('p')
+    /* Remove the button element, because the whole note entry can be clicked
     const button = document.createElement('button')
 
     // REMOVE Note button
@@ -49,7 +51,8 @@ const generateNoteDOM = note => {
         saveNotes(notes)
         renderNotes(notes, filters)
     })
-    
+    */
+
     // Note\Anchor Text/Title
     if (note.title.length) {
         textElement.innerHTML = note.title
@@ -58,8 +61,14 @@ const generateNoteDOM = note => {
     }
     
     // Add Title Text to the <div>
-    textElement.setAttribute('href', `/edit.html#${note.id}`)
     noteElement.appendChild(textElement)
+    // 11/18/20 - The text element was changed to a <p> element, and noteELement was changed
+    // to an <a>, so set the href to the noteElement instead
+    noteElement.setAttribute('href', `/edit.html#${note.id}`)
+
+    // b.6 Populate the Edited Status message
+    statusElement.textContent = textLastEdited(note.updateAt)
+    noteElement.appendChild(statusElement)
 
     return noteElement
 }
@@ -100,18 +109,27 @@ const sortNotes = (notes, sortBy) => {
 
 // Render the Note entries
 const renderNotes = (notes, filters) => {
+    const notesEl = document.querySelector('#notes')
     notes = sortNotes(notes, filters.sortBy)
    
     const filteredNotes = notes.filter(note => 
         note.title.toLowerCase().includes(filters.searchText.toLowerCase())
     )
 
-    document.querySelector('#notes').innerHTML = ''
+    notesEl.innerHTML = ''
 
-    filteredNotes.forEach(note => {
-        const noteElement = generateNoteDOM(note)
-        document.querySelector('#notes').appendChild(noteElement)
-    })
+    if (filteredNotes.length > 0) {
+        filteredNotes.forEach(note => {
+            const noteElement = generateNoteDOM(note)
+            notesEl.appendChild(noteElement)
+        })
+    } else {
+        const emptyMessage = document.createElement('p')
+        emptyMessage.textContent = 'No notes entered'
+        emptyMessage.classList.add('empty-message')
+        notesEl.appendChild(emptyMessage)
+    }
+
 }
 
 const textLastEdited = (timeStamp) => `Last edited ${moment(timeStamp).fromNow()}`
