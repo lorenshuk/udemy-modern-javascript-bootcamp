@@ -60,14 +60,19 @@ const generateNoteDOM = note => {
         textElement.innerHTML = 'Untitled Note'
     }
     
+    // 12/10/20 - Resume L124 - add CSS Classes to the elements - noteElement, textElement, statusElement
+    textElement.classList.add('list-item__title')
     // Add Title Text to the <div>
     noteElement.appendChild(textElement)
     // 11/18/20 - The text element was changed to a <p> element, and noteELement was changed
     // to an <a>, so set the href to the noteElement instead
     noteElement.setAttribute('href', `/edit.html#${note.id}`)
-
+    // 12/10/20 - Resume L124 - add CSS Classes to the elements - noteElement, textElement, statusElement
+    noteElement.classList.add('list-item')
     // b.6 Populate the Edited Status message
     statusElement.textContent = textLastEdited(note.updateAt)
+    // 12/10/20 - Resume L124 - add CSS Classes to the elements - noteElement, textElement, statusElement
+    statusElement.classList.add('list-item__subtitle')
     noteElement.appendChild(statusElement)
 
     return noteElement
