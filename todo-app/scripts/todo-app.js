@@ -43,12 +43,12 @@ let hideCompleted = false
 renderTodos(todos, filters)
 
  // Lesson 57: Listener for the Filter Challenge
-document.querySelector('#filtertodos').addEventListener('input', e => {
+document.querySelector('#search-text').addEventListener('input', e => {
     filters.searchText = e.target.value
     renderTodos(todos, filters)
 })
 
-document.querySelector('#add-form').addEventListener('submit', e => {
+document.querySelector('#new-todo').addEventListener('submit', e => {
     e.preventDefault()
     todos.push({
         id: uuidv4(),
