@@ -50,14 +50,22 @@ document.querySelector('#search-text').addEventListener('input', e => {
 
 document.querySelector('#new-todo').addEventListener('submit', e => {
     e.preventDefault()
-    todos.push({
-        id: uuidv4(),
-        text: e.target.elements.addToDo.value,
-        completed: false
-    })
-    saveTodos(todos)
+    // Challenge: Lesson 126 1/30/21
+    // 1. Trim all the inputs
+    // 2. Check for empty strings
+    let text = e.target.elements.addToDo.value.trim()
 
-    renderTodos(todos, filters)
+    if (text.length > 0) {
+        todos.push({
+            id: uuidv4(),
+            text,
+            completed: false
+        })
+    
+        saveTodos(todos)
+        renderTodos(todos, filters)
+    }
+
     e.target.elements.addToDo.value = ''
 })
 
