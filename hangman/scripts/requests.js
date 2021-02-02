@@ -1,7 +1,7 @@
 // *** 10/18/20 Lesson 117 *** -> i. Use Async/Await to clean up the code
 const getPuzzle = async (wordCount) => {
     // i.1 Use the fetch() function to populate a new "response" variable
-    const response = await fetch('http://puzzle.mead.io/puzzle?wordCount=${wordCount}')
+    const response = await fetch('//puzzle.mead.io/puzzle?wordCount=${wordCount}')
     
      // i.3 Check the response is valid (200)
     if (response.status === 200) {
@@ -17,7 +17,7 @@ const getPuzzle = async (wordCount) => {
 const getPuzzleSync = () => {
     const request = new XMLHttpRequest()
 
-    request.open('GET', 'http://puzzle.mead.io/puzzle', 0)
+    request.open('GET', '//puzzle.mead.io/puzzle', 0)
     request.send() 
 
     if (request.readyState === 4 && request.status === 200) {
