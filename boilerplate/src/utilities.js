@@ -8,6 +8,6 @@ function multi(a, b) {
 }
 
 // Lesson 139: Test the problem with webpack server - 2/14/21 5:24 PM
-console.log('Utilities.js: test a problem with webpack server')
+// console.log('Utilities.js: test a problem with webpack server')
 
 export { multi, add as default}
