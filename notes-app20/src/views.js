@@ -1,7 +1,7 @@
 import moment from 'moment'
 // Import the filter & sortNotes function for renderNotes()
 import { getFilters } from './filters'
-import { sortNotes } from './notes'
+import { getNotes, sortNotes } from './notes'
 
 // Create the individual NOTE <p> element for the main page
 const generateNoteDOM = note => {
@@ -30,7 +30,7 @@ const generateNoteDOM = note => {
     noteElement.classList.add('list-item')
 
     // b.6 Populate the Edited Status message
-    statusElement.textContent = generateLastEdited(note.updateAt)
+    statusElement.textContent = generateLastEdited(note.updatedAt)
 
     // 12/10/20 - Resume L124 - add CSS Classes to the elements - noteElement, textElement, statusElement
     statusElement.classList.add('list-item__subtitle')
@@ -64,8 +64,27 @@ const renderNotes = () => {
     }
 }
 
+const initializeEditPage = (noteID) => {
+    // DOM Elements
+    const titleElement = document.querySelector('#note-title')
+    const bodyElement = document.querySelector('#note-body')
+    const editElement = document.querySelector('#note-edited')
+    // 2/21/21 dateElement(#last-edited) was missing from the code, so added it now
+    const dateElement = document.querySelector('#last-edited')
+    const notes = getNotes()
+    const note = notes.find(eNote => eNote.id === noteID)
+
+    if (!note) {
+        location.assign('/index.html')
+    }
+
+    titleElement.value = note.title
+    bodyElement.value = note.body
+    dateElement.textContent = generateLastEdited(note.updatedAt)
+}
+
 const generateLastEdited = (timeStamp) => {
     return `Last edited ${moment(timeStamp).fromNow()}`
 }
 
-export { renderNotes }
+export { generateNoteDOM, renderNotes, generateLastEdited, initializeEditPage }

@@ -87,7 +87,7 @@ const sortNotes = (sortBy) => {
     }
 }
 
-const updateNote = (id, updates) => {
+function updateNote(id, updates) {
     // 1. Verify the ID paramater - find the correct note element
     const note = notes.find((note) => note.id == id)
     const timeStamp = moment().valueOf()
@@ -99,13 +99,15 @@ const updateNote = (id, updates) => {
 
     if (typeof updates.title == 'string' && updates.title != note.title) {
         note.title = updates.title
-        note.updateAt = timeStamp
+        note.updatedAt = timeStamp
     }
     if (typeof updates.body == 'string' && updates.body != note.body) {
         note.body = updates.body
-        note.updateAt = timeStamp
+        note.updatedAt = timeStamp
     }
     saveNotes()
+
+    return note
 }
 
 notes = loadNotes()

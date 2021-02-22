@@ -10,7 +10,7 @@ renderNotes()
 
 document.querySelector('#create-note').addEventListener('click', e => {
     const noteId = createNote()
-    location.assign(`/edit.html#${noteID}`)
+    location.assign(`/edit.html#${noteId}`)
 })
 
 // Listen for the input filter handler
