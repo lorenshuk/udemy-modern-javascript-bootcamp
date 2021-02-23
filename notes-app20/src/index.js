@@ -5,7 +5,6 @@ import { setFilters } from './filters'
 import { renderNotes } from './views'
 
 // Display each Note element to the DOM in a <p> element
-// 4.1 Rewritten renderNotes() to not take any arguments
 renderNotes()
 
 document.querySelector('#create-note').addEventListener('click', e => {

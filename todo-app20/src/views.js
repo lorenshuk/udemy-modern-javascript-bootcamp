@@ -1,33 +1,24 @@
-'use strict'
+import { getFilters } from './filters'
+import { getTodos, saveTodos, toggleTodo, removeTodo } from './todos'
 
-// Fetch the local todos JSON String array
-const getSavedTodos = () => {
-    const todoJSON = localStorage.getItem('todos')
-
-    try {
-        return todoJSON !== null ? JSON.parse(todoJSON) : []
-    } catch {
-        return []
-    }
-}
-
-// Save the todos object array to localStorage
-const saveTodos = todos =>
-    localStorage.setItem('todos', JSON.stringify(todos))
-
-// Render application todos based on user "filters"
-const renderTodos = (todos, filters) => {
+// renderTodos
+// Arguments: none
+// Return value: none
+function renderTodos() {
     const todoEl = document.querySelector('#todos')
-    const filteredTodos = todos.filter(todo => 
+    const todos = getTodos()
+    const filters = getFilters()
+    
+    const filteredTodos = todos.filter(todo =>
         todo.text.toLowerCase().includes(filters.searchText.toLowerCase()) && (!filters.hideCompleted || !todo.completed)
     )
     todoEl.innerHTML = ''
 
     // Display Incomplete Header
     generateSummaryDOM(filteredTodos)
-    
+
     // Display Filtered To Do's
-    if (filteredTodos.length){
+    if (filteredTodos.length) {
         filteredTodos.forEach(e => todoEl.appendChild(generateTodoDOM(e)))
     } else {
         const emptySum = document.createElement('p')
@@ -36,26 +27,11 @@ const renderTodos = (todos, filters) => {
         todoEl.appendChild(emptySum)
     }
 }
- 
-const removeToDo = (id) => {
-    const todoIndex = todos.findIndex(todo => todo.id === id)
-    console.log(`remove: ${todoIndex}`)
-   if (todoIndex > -1) {
-       todos.splice(todoIndex, 1)
-   }
-}
 
-const toggleToDo = id => {
-    const todo = todos.find(el => el.id === id)
-
-    if (todo) {
-        console.log(`[removedToDo()] todo:${todo}`)
-        todo.completed = !todo.completed
-    }
-}
-
-// Get the DOM elements for an individual DOM
-const generateTodoDOM = todo => {
+// generateTodoDOM
+// Arguments: todo
+// Return value: the todo element
+function generateTodoDOM (todo) {
     const todoElement = document.createElement('label')
     const containerEl = document.createElement('div')
     const todoCheck = document.createElement('input')
@@ -67,10 +43,10 @@ const generateTodoDOM = todo => {
     todoCheck.checked = todo.completed
     containerEl.appendChild(todoCheck)
     todoCheck.addEventListener('change', () => {
-        toggleToDo(todo.id)
-       // todo.completed = !todo.completed
-        saveTodos(todos)
-        renderTodos(todos, filters)
+        toggleTodo(todo.id)
+        // todo.completed = !todo.completed
+        saveTodos()
+        renderTodos()
     })
 
     // To Do Text
@@ -88,31 +64,33 @@ const generateTodoDOM = todo => {
     removeButton.classList.add('button', 'button--text')
     todoElement.appendChild(removeButton)
     removeButton.addEventListener('click', e => {
-        removeToDo(todo.id)
-        saveTodos(todos)
-        renderTodos(todos, filters)
+        removeTodo(todo.id)
+        saveTodos()
+        renderTodos()
     })
 
     return todoElement
 }
 
-// Get the DOM elements for the list summary
-const generateSummaryDOM = filteredTodos => {
+// generateSummaryDOM
+// Arguments: incompletedTodos
+// Return value: the summary element
+function generateSummaryDOM (filteredTodos) {
     const summary = document.createElement('h2')
     summary.classList.add('list-title')
     let plural = ''
 
     // Count up the incomplete TO DO's
     const incompleteToDos = filteredTodos.filter(todo => !todo.completed)
-
-    if (!todos.length) {
-        summary.textContent = `No TO DO's entered`
-    } 
-    else if (!incompleteToDos.length) {
+    console.log(`todos.length: ${todos.length}`)
+    if (filteredTodos.length === incompleteToDos.length) {
         summary.textContent = `All Filtered TO DO's Completed! Good work!`
     } else {
-        plural = todos.length == 1 ? '' : "'s"
+        plural = incompleteToDos.length === 1 ? '' : "'s"
         summary.textContent = `*You have ${incompleteToDos.length} TO DO${plural} left`
     }
     document.querySelector('#todos').appendChild(summary)
 }
+
+// Make sure to set up the exports
+export { renderTodos, generateTodoDOM, generateSummaryDOM }
