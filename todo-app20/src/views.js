@@ -1,15 +1,11 @@
 import { getFilters } from './filters'
-import { getTodos, saveTodos, toggleTodo, removeTodo } from './todos'
+import { getTodos, toggleTodo, removeTodo, saveTodos } from './todos'
 
-// renderTodos
-// Arguments: none
-// Return value: none
 function renderTodos() {
     const todoEl = document.querySelector('#todos')
-    const todos = getTodos()
     const filters = getFilters()
     
-    const filteredTodos = todos.filter(todo =>
+    const filteredTodos = getTodos().filter(todo =>
         todo.text.toLowerCase().includes(filters.searchText.toLowerCase()) && (!filters.hideCompleted || !todo.completed)
     )
     todoEl.innerHTML = ''
@@ -19,7 +15,9 @@ function renderTodos() {
 
     // Display Filtered To Do's
     if (filteredTodos.length) {
-        filteredTodos.forEach(e => todoEl.appendChild(generateTodoDOM(e)))
+        filteredTodos.forEach(e => {
+            todoEl.appendChild(generateTodoDOM(e))
+        })
     } else {
         const emptySum = document.createElement('p')
         emptySum.classList.add('empty-message')
@@ -28,9 +26,6 @@ function renderTodos() {
     }
 }
 
-// generateTodoDOM
-// Arguments: todo
-// Return value: the todo element
 function generateTodoDOM (todo) {
     const todoElement = document.createElement('label')
     const containerEl = document.createElement('div')
@@ -44,8 +39,6 @@ function generateTodoDOM (todo) {
     containerEl.appendChild(todoCheck)
     todoCheck.addEventListener('change', () => {
         toggleTodo(todo.id)
-        // todo.completed = !todo.completed
-        saveTodos()
         renderTodos()
     })
 
@@ -65,32 +58,28 @@ function generateTodoDOM (todo) {
     todoElement.appendChild(removeButton)
     removeButton.addEventListener('click', e => {
         removeTodo(todo.id)
-        saveTodos()
         renderTodos()
     })
 
     return todoElement
 }
 
-// generateSummaryDOM
-// Arguments: incompletedTodos
-// Return value: the summary element
 function generateSummaryDOM (filteredTodos) {
     const summary = document.createElement('h2')
     summary.classList.add('list-title')
-    let plural = ''
+    const todos = getTodos()
+    const filters = getFilters()
+    const plural = filteredTodos.length === 1 ? '' : "'s"
 
-    // Count up the incomplete TO DO's
-    const incompleteToDos = filteredTodos.filter(todo => !todo.completed)
-    console.log(`todos.length: ${todos.length}`)
-    if (filteredTodos.length === incompleteToDos.length) {
-        summary.textContent = `All Filtered TO DO's Completed! Good work!`
+    // Count up the Completed TO DO's
+    const completedToDos = todos.filter(todo => todo.completed)
+    
+    if (filters.hideCompleted && completedToDos.length > 0 && completedToDos.length === todos.length) {
+        summary.textContent = `All TO DO's Completed! Good work!`
     } else {
-        plural = incompleteToDos.length === 1 ? '' : "'s"
-        summary.textContent = `*You have ${incompleteToDos.length} TO DO${plural} left`
+        summary.textContent = `*You have ${todos.length - completedToDos.length} TO DO${plural} left`
     }
     document.querySelector('#todos').appendChild(summary)
 }
 
-// Make sure to set up the exports
 export { renderTodos, generateTodoDOM, generateSummaryDOM }

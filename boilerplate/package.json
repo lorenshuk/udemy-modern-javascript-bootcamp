@@ -11,8 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.12.16",
+    "@babel/preset-env": "^7.13.5",
     "babel-cli": "^6.26.0",
     "babel-loader": "^8.2.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "live-server": "^1.2.1",
     "webpack": "^5.21.0",

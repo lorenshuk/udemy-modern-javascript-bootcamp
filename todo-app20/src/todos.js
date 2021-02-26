@@ -1,30 +1,26 @@
 // Setup the empty todos array
-
 import { v4 as uuidv4 } from 'uuid'
-import moment from 'moment'
 
-// loadTodos
-// Arguments: none
-// Return value: none
 let todos = []
 
-// Retrieve the notes object from localStorage
+// Retrieve the windows.localStorage "todos"  and store it to the app's "todos" object
 function loadTodos() {
     const todosJSON = localStorage.getItem('todos')
 
     // Check for invalid JSON input
     try {
-        return todosJSON !== null ? JSON.parse(todosJSON) : []
+        todos = todosJSON ? JSON.parse(todosJSON) : []
     } catch {
-        return []
+        todos = []
     }
-
 }
 
 // saveTodos
 // Arguments: none
 // Return value: none
-const saveTodos = () => localStorage.setItem('todos', JSON.stringify(todos))
+const saveTodos = () => {
+    localStorage.setItem('todos', JSON.stringify(todos))
+}
 
 // getTodos
 // Arguments: none
@@ -50,7 +46,6 @@ function createTodo (tdText) {
 // Return value: none
 function removeTodo (todoID) {
     const todoIndex = todos.findIndex(todoEl => todoEl.id === todoID)
-    console.log(`removeTodo(): ${todoID}`)
 
     if (todoIndex > -1) {
         todos.splice(todoIndex, 1)
@@ -66,10 +61,11 @@ function toggleTodo (todoID) {
 
     if (foundTD) {
         foundTD.completed = !foundTD.completed
+        saveTodos()
     }
 }
 
 // Make sure to call loadTodos and setup the exports
-todos = loadTodos()
+loadTodos()
 
-export { saveTodos, getTodos, createTodo, removeTodo, toggleTodo }
+export { loadTodos, getTodos, createTodo, removeTodo, toggleTodo }
