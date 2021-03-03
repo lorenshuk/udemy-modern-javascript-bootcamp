@@ -54,20 +54,28 @@ const team = {
 // console.log(`newHouse: `)
 // console.log(newHouse)
 
-/***** Lesson 151: Object Spread Operator *****/
-let person = {
-    name: 'Jimbo',
-    age: 69
-}
+// /***** Lesson 151: Object Spread Operator *****/
+// let person = {
+//     name: 'Jimbo',
+//     age: 69
+// }
 
-let location = {
-    city: 'Tel Aviv',
-    country: 'Israel'
-}
+// let location = {
+//     city: 'Tel Aviv',
+//     country: 'Israel'
+// }
 
-let overview = {
-    ...person,
-    ...location
-}
+// let overview = {
+//     ...person,
+//     ...location
+// }
 
-console.log(overview)
+// console.log(overview)
+
+
+/********************************/
+/** Lesson 152: Destructuring ***/
+/********************************/
+
+
+/*** End of Lesson 152: Destructuring ***/
