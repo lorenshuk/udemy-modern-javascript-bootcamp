@@ -3,10 +3,10 @@ import { getTodos, toggleTodo, removeTodo, saveTodos } from './todos'
 
 function renderTodos() {
     const todoEl = document.querySelector('#todos')
-    const filters = getFilters()
+    const { hideCompleted, searchText } = getFilters()
     
     const filteredTodos = getTodos().filter(todo =>
-        todo.text.toLowerCase().includes(filters.searchText.toLowerCase()) && (!filters.hideCompleted || !todo.completed)
+        todo.text.toLowerCase().includes(searchText.toLowerCase()) && (!hideCompleted || !todo.completed)
     )
     todoEl.innerHTML = ''
 

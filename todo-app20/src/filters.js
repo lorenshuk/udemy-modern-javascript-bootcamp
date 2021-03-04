@@ -7,18 +7,20 @@ let filters = {
 // getFilters
 // Arguments: none
 // Return value: filters object
-const getFilters = () => filters
+function getFilters() { 
+    return filters
+}
 
 // setFilters
 // Arguments: updates object with optional searchText or hideCompleted
 // Return value: none
 // Pass an updates object
-function setFilters (updates) {
-    if (typeof updates.searchText === 'string') {
-        filters.searchText = updates.searchText
+function setFilters ({ searchText, hideCompleted }) {
+    if (typeof searchText === 'string') {
+        filters.searchText = searchText
     }
-    if (typeof updates.hideCompleted === 'boolean') {
-        filters.hideCompleted = updates.hideCompleted
+    if (typeof hideCompleted === 'boolean') {
+        filters.hideCompleted = hideCompleted
     }
 }
 
